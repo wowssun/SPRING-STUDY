@@ -1,0 +1,298 @@
+CREATE TABLE AUTH
+(
+	mid varchar2(20) NOT NULL,
+	authority varchar2(20) DEFAULT 'ROLE_USER' NOT NULL,
+	PRIMARY KEY (mid)
+);
+
+CREATE TABLE A_MEMBER
+(
+	mid varchar2(20) NOT NULL,
+	name varchar2(20) NOT NULL,
+	pw varchar2(100) NOT NULL,
+	phone varchar2(30) NOT NULL,
+	email varchar2(50) NOT NULL,
+	join_date date DEFAULT SYSDATE NOT NULL,
+	stop_date date DEFAULT NULL,
+        enabled CHAR(1) DEFAULT '1',
+	PRIMARY KEY (mid)
+);
+
+ALTER TABLE AUTH
+	ADD FOREIGN KEY (mid)
+	REFERENCES A_MEMBER (mid)
+    ON DELETE CASCADE;
+
+CREATE TABLE ARTIST
+(
+	mid varchar2(20) NOT NULL,
+	major varchar2(20) NOT NULL,
+	introduce varchar2(4000) NOT NULL,
+	career varchar2(4000) NOT NULL,
+	photo varchar2(30) NOT NULL,
+	PRIMARY KEY (mid)
+);
+
+ALTER TABLE ARTIST
+	ADD FOREIGN KEY (mid)
+	REFERENCES A_MEMBER (mid)
+    ON DELETE CASCADE
+;
+
+CREATE TABLE REQUEST
+(
+	reque_no number NOT NULL,
+	mid varchar2(20) NOT NULL,
+	state varchar2(10) DEFAULT '대기' NOT NULL,
+	request_date date DEFAULT SYSDATE,
+	comple_date date DEFAULT NULL,
+	PRIMARY KEY (reque_no)
+);
+
+drop table request;
+
+ALTER TABLE REQUEST
+	ADD FOREIGN KEY (mid)
+	REFERENCES A_MEMBER (mid)
+    ON DELETE CASCADE
+;
+
+-- 멤버  
+-- 비번 : 1234
+INSERT INTO A_MEMBER (mid, name, pw, phone, email, join_date, stop_date)
+VALUES ('abc', '가나다', '$2a$12$9coqF.XYMTvO5VgZF6XvJ..sUl06fiEmtmRQEzGJe2hz7Sf7GODma', '010-0000-0000', 'abc@gmail.com', TO_DATE('2023-10-16', 'YYYY-MM-DD'), NULL);
+-- 비번 : 5678
+INSERT INTO A_MEMBER (mid, name, pw, phone, email, join_date, stop_date)
+VALUES ('def', '라마바', '$2a$12$9bC8MJcr2wUyKWXmD0U6fOv4Ee15Pi0V9/h3/OTnpWpKB3klRFqbq', '010-1111-1111', 'def@gmail.com', TO_DATE('2023-10-16', 'YYYY-MM-DD'), TO_DATE('2023-10-17', 'YYYY-MM-DD'));
+--비번 : 9012
+INSERT INTO A_MEMBER (mid, name, pw, phone, email, join_date, stop_date)
+VALUES ('ghi', '사아자', '$2a$12$50wv6lpXxCxwCzZ8QaySSeKucQYMnF49HPB5RkN8bwgLMjlk8Kt5i', '010-2222-2222', 'ghi@gmail.com', TO_DATE('2023-10-16', 'YYYY-MM-DD'), NULL);
+--비번 : 3456
+INSERT INTO A_MEMBER (mid, name, pw, phone, email, join_date, stop_date)
+VALUES ('jkl', '차카타', '$2a$12$79k0/o3rASVGPlJV15KTnedJ3b6GVmS0ComgHcmlarkia4kCZvKIi', '010-3333-3333', 'jkl@gmail.com', TO_DATE('2023-10-16', 'YYYY-MM-DD'), TO_DATE('2023-10-18', 'YYYY-MM-DD'));
+-- 비번 : 1234
+INSERT INTO A_MEMBER (mid, name, pw, phone, email, join_date, stop_date)
+VALUES ('aaa', '가나다', '$2a$12$9coqF.XYMTvO5VgZF6XvJ..sUl06fiEmtmRQEzGJe2hz7Sf7GODma', '010-0000-0000', 'abc@gmail.com', TO_DATE('2023-10-16', 'YYYY-MM-DD'), NULL);
+-- 비번 : 5678
+INSERT INTO A_MEMBER (mid, name, pw, phone, email, join_date, stop_date)
+VALUES ('bbb', '라마바', '$2a$12$9bC8MJcr2wUyKWXmD0U6fOv4Ee15Pi0V9/h3/OTnpWpKB3klRFqbq', '010-1111-1111', 'def@gmail.com', TO_DATE('2023-10-16', 'YYYY-MM-DD'), TO_DATE('2023-10-17', 'YYYY-MM-DD'));
+--비번 : 9012
+INSERT INTO A_MEMBER (mid, name, pw, phone, email, join_date, stop_date)
+VALUES ('ccc', '사아자', '$2a$12$50wv6lpXxCxwCzZ8QaySSeKucQYMnF49HPB5RkN8bwgLMjlk8Kt5i', '010-2222-2222', 'ghi@gmail.com', TO_DATE('2023-10-16', 'YYYY-MM-DD'), NULL);
+--비번 : 3456
+INSERT INTO A_MEMBER (mid, name, pw, phone, email, join_date, stop_date)
+VALUES ('ddd', '차카타', '$2a$12$79k0/o3rASVGPlJV15KTnedJ3b6GVmS0ComgHcmlarkia4kCZvKIi', '010-3333-3333', 'jkl@gmail.com', TO_DATE('2023-10-16', 'YYYY-MM-DD'), TO_DATE('2023-10-18', 'YYYY-MM-DD'));
+-- 비번 : 1234
+INSERT INTO A_MEMBER (mid, name, pw, phone, email, join_date, stop_date)
+VALUES ('eee', '가나다', '$2a$12$9coqF.XYMTvO5VgZF6XvJ..sUl06fiEmtmRQEzGJe2hz7Sf7GODma', '010-0000-0000', 'abc@gmail.com', TO_DATE('2023-10-16', 'YYYY-MM-DD'), NULL);
+-- 비번 : 5678
+INSERT INTO A_MEMBER (mid, name, pw, phone, email, join_date, stop_date)
+VALUES ('fff', '라마바', '$2a$12$9bC8MJcr2wUyKWXmD0U6fOv4Ee15Pi0V9/h3/OTnpWpKB3klRFqbq', '010-1111-1111', 'def@gmail.com', TO_DATE('2023-10-16', 'YYYY-MM-DD'), TO_DATE('2023-10-17', 'YYYY-MM-DD'));
+--비번 : 9012
+INSERT INTO A_MEMBER (mid, name, pw, phone, email, join_date, stop_date)
+VALUES ('ggg', '사아자', '$2a$12$50wv6lpXxCxwCzZ8QaySSeKucQYMnF49HPB5RkN8bwgLMjlk8Kt5i', '010-2222-2222', 'ghi@gmail.com', TO_DATE('2023-10-16', 'YYYY-MM-DD'), NULL);
+--비번 : 3456
+INSERT INTO A_MEMBER (mid, name, pw, phone, email, join_date, stop_date)
+VALUES ('hhh', '차카타', '$2a$12$79k0/o3rASVGPlJV15KTnedJ3b6GVmS0ComgHcmlarkia4kCZvKIi', '010-3333-3333', 'jkl@gmail.com', TO_DATE('2023-10-16', 'YYYY-MM-DD'), TO_DATE('2023-10-18', 'YYYY-MM-DD'));
+-- 비번 : 1234
+INSERT INTO A_MEMBER (mid, name, pw, phone, email, join_date, stop_date)
+VALUES ('bbo', '까나', '$2a$12$9coqF.XYMTvO5VgZF6XvJ..sUl06fiEmtmRQEzGJe2hz7Sf7GODma', '010-0000-0000', 'abc@gmail.com', TO_DATE('2023-10-16', 'YYYY-MM-DD'), NULL);
+
+--비번 : 1111
+INSERT INTO A_MEMBER (mid, name, pw, phone, email, join_date, stop_date)
+VALUES ('admin', '관리자', '$2a$12$Ivoa6NrXT1g7BHQ1iaiw9uAbjE7IQvHobQcY9SEVlZDKHaXUZt.pG', '010-3333-3333', 'jkl@gmail.com', TO_DATE('2023-10-16', 'YYYY-MM-DD'), TO_DATE('2023-10-18', 'YYYY-MM-DD'));
+
+-- 권한
+INSERT INTO AUTH (mid, authority)
+VALUES ('abc', 'ROLE_USER');
+INSERT INTO AUTH (mid, authority)
+VALUES ('def', 'ROLE_LOCK');
+INSERT INTO AUTH (mid, authority)
+VALUES ('ghi', 'ROLE_ARTIST');
+INSERT INTO AUTH (mid, authority)
+VALUES ('jkl', 'ROLE_LOCK');
+INSERT INTO AUTH (mid, authority)
+VALUES ('admin', 'ROLE_ADMIN');
+
+select * from artist;
+SELECT * FROM A_MEMBER;
+SELECT * FROM AUTH;
+select * from request;
+
+-- 로그인 
+SELECT m.mid, m.name, m.pw, m.phone, m.email, m.join_date, m.stop_date, m.enabled, a.authority
+FROM a_member m
+JOIN auth a
+ON m.mid = a.mid;
+
+-- 회원가입
+INSERT INTO A_MEMBER (mid, name, pw, phone, email, join_date)
+VALUES ('AAA', '가나다', '$2a$12$9coqF.XYMTvO5VgZF6XvJ..sUl06fiEmtmRQEzGJe2hz7Sf7GODma', '010-0000-0000', 'abc@gmail.com', SYSDATE);
+
+-- 아이디 중복체크
+SELECT mid
+FROM A_MEMBER
+WHERE mid = 'aaa';
+
+-- 아이디 찾기
+SELECT mid
+FROM a_member
+WHERE mid = 'admin'
+AND phone = '010-3333-3333';
+
+-- 비밀번호 찾기 
+SELECT COUNT(*)
+FROM a_member
+WHERE mid = 'admin'
+AND phone = '010-3333-3333'
+AND name = 'ㅁ';
+
+-- 비밀번호 변경
+------------------------
+
+-- 내 정보 보기
+SELECT * FROM A_MEMBER
+WHERE mid = 'admin';
+
+-- 내 정보 수정
+UPDATE A_MEMBER 
+SET phone='010-1111-1111' ,email='admin@naver.com'
+WHERE mid = 'admin';
+
+-- 회원 탈퇴
+DELETE from A_MEMBER 
+WHERE mid='jkl';
+
+-- 작가 신청 - 작가정보테이블
+INSERT INTO ARTIST (mid, major, introduce, career, photo)
+VALUES ('AAA', '회화', '안녕하세요 여러분', '- 2023 DDD', 'AAA.jpg');
+
+-- 작가 신청 - 작가신청테이블
+INSERT INTO REQUEST (reque_no,mid)
+VALUES (SEQ_REQUEST_REQUE_NO.NEXTVAL,'ccc');
+
+-- 작가 신청 조회하기
+SELECT mid,state 
+FROM REQUEST
+WHERE mid = 'AAA';
+
+-- 작가 정보 보기
+SELECT * 
+FROM ARTIST
+WHERE mid = 'AAA';
+
+-- 작가 정보 수정 작가 대표사진, 분야정보, 이력, 자신에 대한 소개
+UPDATE ARTIST 
+SET major='판화', introduce='안녕하세요 수정', career='-2023 경력 수정', photo='AAA.png'
+WHERE mid = 'AAA';
+
+
+-------------------------------
+-- 검색
+-- where mid LIKE '%'||#{keyword}||'%' 
+
+-- 전체회원목록 - 페이징,검색
+SELECT mid, name,join_date
+FROM ( SELECT /*+INDEX_DESC(A_MEMBER pk_user) */ 
+rownum rn, mid, name,join_date 
+FROM A_MEMBER 
+WHERE mid LIKE '%'||'abc'||'%' 
+AND rownum <= 2 * 1 )
+WHERE rn > 2 * (1 -1) ;
+
+-- 잠금회원목록 - 페이징, 검색
+SELECT mid, name,stop_date
+FROM ( SELECT /*+INDEX_DESC(A_MEMBER pk_lock) */ 
+rownum rn, mid, name, stop_date 
+FROM A_MEMBER 
+WHERE stop_date is not null
+AND mid LIKE '%'||'def'||'%' 
+AND rownum <= 2 * 1 )
+WHERE rn > 2 * (1 -1) ;
+
+
+-- 잠금해제하기
+UPDATE AUTH
+SET authority = 'ROLE_USER'
+WHERE mid = 'def';
+
+-- 작가목록 - 페이징, 검색  
+SELECT mid, name,join_date
+FROM ( SELECT /*+INDEX_DESC(A_MEMBER pk_artist) */ 
+rownum rn, mid, name,join_date 
+FROM A_MEMBER 
+WHERE mid LIKE '%'||'abc'||'%' 
+AND rownum <= 2 * 1 )
+WHERE rn > 2 * (1 -1) ;
+
+-- 작가신청목록 - 페이징, 검색  -- 조인 추가 
+SELECT reque_no, mid, name, request_date
+FROM ( SELECT /*+INDEX_DESC(REQUEST pk_request) */ 
+rownum rn, reque_no, rq.mid, am.name, request_date
+FROM REQUEST rq 
+JOIN A_MEMBER am ON rq.mid = am.mid
+WHERE rq.mid LIKE '%'||'AAA'||'%' 
+AND rownum <= 2 * 1 )
+WHERE rn > 2 * (1 -1) ;
+
+-- 작가신청상세조회  -- user와 같다?
+
+-- 작가신청 승인 / 거절
+UPDATE AUTH
+SET authority = 'ROLE_ARTIST'
+WHERE mid ='def';
+
+-- 작가 승인 / 거절 목록 - 페이징, 검색 아이디, 이름, 전화번호, 이메일 , 승인 / 거절일시
+SELECT mid, name, phone, email,state, comple_date
+FROM ( SELECT /*+INDEX_DESC(REQUEST pk_okrequest) */ 
+rownum rn, rq.mid, am.name, am.phone, am.email,state,  comple_date
+FROM REQUEST rq 
+JOIN A_MEMBER am ON rq.mid = am.mid
+WHERE rq.mid LIKE '%'||'bbb'||'%' 
+AND rq.comple_date is not null
+AND rownum <= 2 * 1 )
+WHERE rn > 2 * (1 -1);
+
+SELECT mid, name, phone, email,state, comple_date    
+FROM ( SELECT /*+INDEX_DESC(REQUEST pk_okrequest) */      
+rownum rn, rq.mid, am.name, am.phone, am.email, state,  comple_date    
+FROM REQUEST rq     
+JOIN A_MEMBER am ON rq.mid = am.mid  WHERE                            
+(  mid LIKE '%'|| ? ||'%' )                    
+AND rq.comple_date IS NOT NULL     
+AND rownum <= ? * ? )    
+WHERE rn > ? * ( ? -1);
+
+SELECT COUNT(*) FROM A_MEMBER
+WHERE mid LIKE '%'||'AAA'||'%';
+
+select * from a_member;
+select * from auth;
+
+select * from request
+WHERE reque_no > 0 
+AND state='대기';
+
+
+select * from request
+WHERE reque_no > 0 
+AND comple_date is not null;
+
+
+select * from request;
+
+update request set state='승인'
+where mid='bbb';
+
+update request set comple_date=sysdate
+where mid='bbb';
+
+
+delete from a_member where mid='AAA';
+
+select CONSTRAINT_NAME, TABLE_NAME, R_CONSTRAINT_NAME
+from user_constraints
+where CONSTRAINT_NAME = 'SYS_C008518' ;
+
+commit;
+
