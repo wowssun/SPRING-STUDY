@@ -1,0 +1,32 @@
+select * from free;
+
+CREATE SEQUENCE SEQ_REPLY_rpno INCREMENT BY 1 START WITH 1;
+
+CREATE TABLE REPLY
+(
+	rpno number NOT NULL,
+	frno number NOT NULL,
+	mid varchar2(20) NOT NULL,
+	reply varchar2(1000) NOT NULL,
+	reg_date date DEFAULT SYSDATE NOT NULL,
+	update_date date DEFAULT SYSDATE,
+	PRIMARY KEY (rpno)
+);
+
+ALTER TABLE REPLY
+	ADD FOREIGN KEY (mid)
+	REFERENCES A_MEMBER (mid)
+	ON DELETE CASCADE
+;
+
+ALTER TABLE REPLY
+	ADD FOREIGN KEY (frno)
+	REFERENCES FREE (frno)
+	ON DELETE CASCADE
+;
+
+insert into reply(rpno,frno,mid,reply) values(SEQ_REPLY_rpno.nextval,1,'abc','test');
+
+select * from free;
+select * from reply;
+commit;
